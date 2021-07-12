@@ -38,15 +38,15 @@ def train(SegNet):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--class_num", type=int, default=19, help="训练的类别的种类")
-parser.add_argument("--epoch", type=int, default=1, help="训练迭代次数")
-parser.add_argument("--batch_size", type=int, default=1, help="批训练大小")
-parser.add_argument("--learning_rate", type=float, default=0.001, help="学习率大小")
+parser.add_argument("--class_num", type=int, default=19, help="classes")
+parser.add_argument("--epoch", type=int, default=1, help="number of iteration")
+parser.add_argument("--batch_size", type=int, default=1, help="batach size")
+parser.add_argument("--learning_rate", type=float, default=0.001, help="learning rate")
 parser.add_argument("--momentum", type=float, default=0.9)
-parser.add_argument("--category_weight", type=float, default=[0.7502381287857225, 1.4990483912788268], help="损失函数中类别的权重")
-parser.add_argument("--train_txt", type=str, default="train.txt", help="训练的图片和标签的路径")
-parser.add_argument("--pre_training_weight", type=str, default="vgg16_bn-6c64b313.pth", help="编码器预训练权重路径")
-parser.add_argument("--weights", type=str, default="./weights/", help="训练好的权重保存路径")
+parser.add_argument("--category_weight", type=float, default=[0.7502381287857225, 1.4990483912788268], help="ignore")
+parser.add_argument("--train_txt", type=str, default="train.txt", help="path of dataset")
+parser.add_argument("--pre_training_weight", type=str, default="vgg16_bn-6c64b313.pth", help="path for pretrain")
+parser.add_argument("--weights", type=str, default="./weights/", help="path for results")
 opt = parser.parse_args()
 print(opt)
 
