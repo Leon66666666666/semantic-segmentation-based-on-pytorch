@@ -148,7 +148,7 @@ def test(SegNet):
         return image_seg,ad_mask,relu_value,relu_value_ad, label_mask
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--class_num", type=int, default=19, help="预测的类别的种类")
+parser.add_argument("--class_num", type=int, default=19, help="class")
 parser.add_argument("--weights", type=str, default="weights/SegNet_weights1625783040.5590682.pth", help="训练好的权重路径")
 parser.add_argument("--colors", type=int, default=[[0, 255, 0], [255, 0, 0],[1, 0, 255],[111, 74, 0],[70, 70, 70],[128, 64, 128],[0, 0, 0],[102, 102, 156],[190, 153, 153],[150, 100, 100],[107, 142, 35],
                  [152, 251, 152],[70, 130, 180],[220, 220, 0],[119, 11, 32],[215, 166, 66],[66, 88, 99],[154, 25, 244],[10, 155, 83]], help="类别覆盖的颜色")
