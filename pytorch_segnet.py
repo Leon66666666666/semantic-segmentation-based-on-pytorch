@@ -10,8 +10,8 @@ import time
 import argparse
 
 
-bn_momentum = 0.1  # BN层的momentum
-torch.cuda.manual_seed(1)  # 设置随机种子
+bn_momentum = 0.1  # BNmomentum
+torch.cuda.manual_seed(1)  # random
 
 # 编码器
 class Encoder(nn.Module):
@@ -72,7 +72,7 @@ class Encoder(nn.Module):
         id = []
 
         x = self.enco1(x)
-        x, id1 = F.max_pool2d(x, kernel_size=2, stride=2, return_indices=True)  # 保留最大值的位置
+        x, id1 = F.max_pool2d(x, kernel_size=2, stride=2, return_indices=True)  # max-pooling indices
         id.append(id1)
         x = self.enco2(x)
         x, id2 = F.max_pool2d(x, kernel_size=2, stride=2, return_indices=True)
@@ -90,7 +90,7 @@ class Encoder(nn.Module):
         return x, id
 
 
-# 编码器+解码器
+# encoder and decoder
 class SegNet(nn.Module):
     def __init__(self, input_channels, output_channels):
         super(SegNet, self).__init__()
@@ -165,7 +165,7 @@ class SegNet(nn.Module):
 
         return x, relu_value
 
-    # 删掉VGG-16后面三个全连接层的权重
+    # remove some layers
     def load_weights(self, weights_path):
         weights = torch.load(weights_path)
         del weights["classifier.0.weight"]
@@ -209,7 +209,7 @@ class MyDataset(Data.Dataset):
         image = cv.resize(image, (416, 416))
         image = image/255.0  # 归一化输入
         image = torch.Tensor(image)
-        image = image.permute(2, 0, 1)  # 将图片的维度转换成网络输入的维度（channel, width, height）
+        image = image.permute(2, 0, 1)  # change the dimension ofinput image（channel, width, height）
 
         label = cv.imread(label, 0)
         label = cv.resize(label, (416, 416))
